@@ -19,4 +19,10 @@ from .views import *
 urlpatterns = [
     path('users/', UserViewSet.as_view(actions={'get': 'list', 'post': 'create'}), name = 'list-create-users'),
     path('users/<int:pk>', UserViewSet.as_view(actions={'get': 'retrieve'}), name = 'retrieve-user'),
+    path('events/', EventsList.as_view()),
+    path('events/<int:pk>', EventsDetail.as_view()),
+    path('orders/', OrdersList.as_view()),
+    path('orders/<int:pk>', OrderDetail.as_view()),
+    path('place_order/', PlaceOrder.as_view()),
+    path('account_detail/', AccountDetailView.as_view()),
 ]

@@ -1,10 +1,12 @@
+from random import choices
 from rest_framework.serializers import ModelSerializer
 from rest_framework import serializers
 from .models import *
 
 class UserSerializer(ModelSerializer):
-    password = serializers.CharField(write_only=True)
+    password = serializers.CharField(write_only=True, required=False)
     phone = serializers.IntegerField(write_only=True, required=False)
+    senior = serializers.NullBooleanField()
 
     class Meta:
         model = User
@@ -15,7 +17,8 @@ class UserSerializer(ModelSerializer):
             'phone',
             'first_name',
             'last_name',
-            'id'
+            'id',
+            'senior',
         ]
 
     def create(self,data):
@@ -28,3 +31,13 @@ class UserSerializer(ModelSerializer):
         user.set_password(data['password'])
         user.save()
         return user
+
+class EventSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Events
+        fields = '__all__'
+
+
+class OrderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Orders
