@@ -40,20 +40,20 @@ class AccountDetailView(APIView):
         data = {}
         id = request.user.id
         user = User.objects.filter(id=id).first()
-        profile = User.objects.filter(user=user.id).first()
-        data['phone_no'] = profile.phone_no
-        data['name'] = '{} {}'.format(user.first_name, user.last_name)
-        data['email'] = profile.email
+        # profile = User.objects.filter(user=user).first()
+        # data['phone_no'] = user.phone_no
+        # data['name'] = '{} {}'.format(user.first_name, user.last_name)
+        data['email'] = user.email
         
-        if(profile.senior):
+        if(user.senior):
             data['level'] = 'Senior'
         else:
             data['level'] = 'Junior'
 
         orders = Orders.objects.filter(player_id=user.id)
-        events = {}
+        events = []
         for order in orders:
-            events[order.event_id.event_name]
+            events.append(order.event_id.event_name)
         data['events'] = events
         return Response(data, status=201)
 
@@ -126,8 +126,8 @@ class PlaceOrder(APIView):
         prev_order = Orders.objects.filter(player_id=request.user.id, event_id=event_id)
         if prev_order:
             return Response({'message': 'You have already registered!!'})  
-        password = self.randomPasswordGenerator()
-        create_order = Orders(player_id=request.user, event_id=event, event_password=password)
+        password = 1234
+        create_order = Orders(player_id=request.user, event_id=event)
         create_order.save()
         return Response({'message': 'Order placed!!'}, status=201)
     
