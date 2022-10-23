@@ -9,6 +9,11 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import generics, viewsets, status
 
+# for mail
+from django.core.mail import EmailMessage
+from django.conf import settings
+from django.template.loader import render_to_string
+
 class UserViewSet(viewsets.ViewSet):
 
     # List All Users -- get method
@@ -121,13 +126,32 @@ class PlaceOrder(APIView):
 
     def post(self, request):
 
+        # template = render_to_string("templates\mail_template.html")
+
         event_id = request.data['event_id'] 
         event = Events.objects.get(pk=event_id)
         prev_order = Orders.objects.filter(player_id=request.user.id, event_id=event_id)
         if prev_order:
             return Response({'message': 'You have already registered!!'})  
-        password = self.randomPasswordGenerator()
-        create_order = Orders(player_id=request.user, event_id=event, event_password=password)
+        password = 1234
+        create_order = Orders(player_id=request.user, event_id=event)
         create_order.save()
+
+        email = EmailMessage(
+            'Thanks from PISB',
+            'body',
+            settings.EMAIL_HOST_USER,
+            [request.user.email],
+        )
+
+        email.fail_silently = False 
+        email.send()
+
         return Response({'message': 'Order placed!!'}, status=201)
+
+
+
+
+
+
     

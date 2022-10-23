@@ -14,6 +14,7 @@ class User(AbstractUser):
 class Events(models.Model):
     event_name = models.CharField(max_length=255)
     event_description = models.CharField(max_length=255)
+    event_id = models.CharField(max_length=255,default=101)
     event_start = models.DateField()
     event_end = models.DateField()
 

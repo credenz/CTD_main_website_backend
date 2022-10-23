@@ -143,3 +143,12 @@ DJOSER = {
     'PASSWORD_RESET_CONFIRM_URL': 'password-reset/{uid}/{token}',
     'PASSWORD_CHANGED_EMAIL_CONFIRMATION': True,
 }
+
+# SMTP config
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_HOST = 'localhost'
+# EMAIL_PORT = 1025
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True 
+
