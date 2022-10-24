@@ -1,16 +1,37 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import pisb from "../../images/pisb.png"
-
+import { debounce } from "debounce";
 
 
 const Navbar = () => {
+
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
+  const [visible, setVisible] = useState(true);
+
+  const handleScroll = debounce(() => {
+    const currentScrollPos = window.pageYOffset;
+
+    setVisible((prevScrollPos > currentScrollPos && prevScrollPos - currentScrollPos > 70) || currentScrollPos < 10);
+
+    setPrevScrollPos(currentScrollPos);
+  }, 100);
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+
+    return () => window.removeEventListener('scroll', handleScroll);
+
+  }, [prevScrollPos, visible, handleScroll]);
+
+ 
+
   return (
     <>
 
 
-  
-      <nav className=" navbar navbar-expand-lg fixed-top navbar-light  " >
+<div style={{ top: visible ? '0' : '-60px' }}>
+      <nav className=" navbar  navbar-expand-lg navbar-light  " >
      
   <div className="container-fluid">
    <NavLink className="navbar-brand text-white link-wrapper nav-logo" to="/"><img src={pisb} alt="" /></NavLink>
@@ -47,7 +68,7 @@ const Navbar = () => {
   
   
 </nav>
-
+</div>
 
 
  

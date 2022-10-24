@@ -17,8 +17,9 @@ import { Routes,Route } from "react-router-dom";
 const App = () => {
   return (
     <>
- 
-    <Navbar/>
+    <Navbar scrolling expand="md" fixed="top">
+    </Navbar>
+    
     <Routes>
    <Route exact path="/" element={<Home/> } />
    <Route exact path="/about" element={ <About/> } />

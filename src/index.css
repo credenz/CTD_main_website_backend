@@ -31,11 +31,11 @@ body {
 /* navbar */
 /* links */
 .navbar{
-  /* background:#1B2735; */
+  background: #0d1118;
 }
 .nav-logo img{
-  width: 170px;
-  height: 50px;
+  width: 150px;
+  height: 44px;
 }
 /* 
 h1 {
@@ -502,9 +502,9 @@ flex-direction: column;
 body .container-e {
   display: flex;
   
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   /* max-width: 1190px; */
  
   
@@ -513,13 +513,13 @@ body .container-e {
 body .container-e .card {
   position: relative;
   /* min-width: 320px; */
-  width: 360px;
-  height: 440px;
+  width: 300px;
+  height: 400px;
   box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.2),
     inset -5px -5px 15px rgba(255, 255, 255, 0.1),
     5px 5px 15px rgba(0, 0, 0, 0.3), -5px -5px 15px rgba(255, 255, 255, 0.1);
   border-radius: 15px;
-  margin: 40px;
+  margin: 20px;
   
   transition: 0.5s;
   background-color: #1B2735;
@@ -540,8 +540,8 @@ body .container-e .card:nth-child(3) .box .content a {
 body .container-e .card .box {
   position: absolute;
   top: 20px;
-  left: 20px;
-  right: 20px;
+  left: 10px;
+  right: 10px;
   bottom: 20px;
   background: #2a2b2f;
   border-radius: 15px;
@@ -585,7 +585,7 @@ body .container-e .card .box .content h3 {
   color: #fff;
   z-index: 1;
   transition: 0.5s;
-  margin-bottom: 15px;
+  /* margin-bottom: 15px; */
 }
 
 body .container-e .card .box .content p {
@@ -604,7 +604,7 @@ body .container-e .card .box .content a {
   border-radius: 5px;
   text-decoration: none;
   color: white;
-  margin-top: 20px;
+  margin-top: 10px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
   transition: 0.5s;
 }
@@ -614,6 +614,125 @@ body .container-e .card .box .content a:hover {
   color: #000;
 }
 
+body .container-e .card .box .content button {
+  position: relative;
+  display: inline-block;
+  padding: 8px 20px;
+  background:  #1B2735;
+  border-radius: 5px;
+  text-decoration: none;
+  color: white;
+  /* margin-top: 10px; */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  transition: 0.5s;
+}
+body .container-e .card .box .content button:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+  background: #fff;
+  color: #000;
+}
+
+/*css for popup*/
+.pop_up_container{
+ position: fixed;
+ top:0;
+ bottom:0;
+ left:0;
+ right:0;
+ padding-top:15%;
+ 
+ /* background: radial-gradient(ellipse at bottom, #1B2735 30%, #090A0F 100%); */
+ }
+
+.popupinfo{
+  overflow: scroll;
+}
+
+.popopuprules{
+  overflow:scroll;
+}
+
+.popupcontact{
+  text-align: center;
+}
+
+.pop_up_header{
+  width:100%;
+  text-align:right;
+  padding:0px 5px;
+ 
+
+}
+
+.pop_up_body{
+  width:30%;
+  height:70%;
+  margin:auto;
+  background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+  padding:0px 20px;
+  border-radius: 15px;
+  overflow-y: scroll;
+  scrollbar-color: #777 #555;
+
+}
+
+.pop_up_body::-webkit-scrollbar{
+    width:1vw;
+}
+.pop_up_body::-webkit-scrollbar-thumb{
+  background-color: #7775;
+}
+.pop_up_body::-webkit-scrollbar-track{
+  background-color: #0e1219;
+}
+
+/*css for tabs*/
+.tab-list {
+  border-bottom: 1px solid #ccc;
+  padding-left: 0;
+}
+
+.tab-list-item {
+  display: inline-block;
+  list-style: none;
+  margin-bottom: -1px;
+  padding: 0.5rem 0.75rem;
+}
+
+.tab-list-active {
+  border-bottom: #10151d;
+  border-top: solid #ccc;
+  border-left: solid #ccc;
+  border-right: solid #ccc;
+
+ 
+  border-width: 1px 1px 0 1px;
+}
+
+.tab-content{
+  overflow:auto;
+}
+
+ @media (max-width:800px) {
+  body .container-e {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    /* flex-wrap: wrap; */
+    /* max-width: 1190px; */
+}
+
+.pop_up_body {
+  width: 50%;
+  height: 70%;
+  margin: auto;
+  background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+  padding: 0px 20px;
+  border-radius: 15px;
+}
+  
+ }
 /* team */
 .main-b{
   display: flex;
