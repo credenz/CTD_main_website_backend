@@ -29,4 +29,5 @@ urlpatterns = [
     path('', include('core.urls')),
     re_path(r'^auth/', include('djoser.urls')),
     re_path(r'^auth/', include('djoser.urls.authtoken')),
+    re_path(r'^auth/', include('djoser.social.urls')),
 ]

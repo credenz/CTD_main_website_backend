@@ -16,6 +16,7 @@ export default function Registration() {
   const [student_id, setstudent_id] = useState("");
   const [error, setError] = useState("");
   const containerRef = useRef(null);
+  const navigate  = useNavigate();
 
   function sign_up_btn() {
     containerRef.current.classList.add("sign-up-mode");
@@ -33,8 +34,8 @@ export default function Registration() {
     containerRef.current.classList.remove("sign-up-mode2");
   }
 
-  const login = async (event)=>{
-    event.preventDefault();
+  const login = async ()=>{
+    //event.preventDefault();
 
     var data = JSON.stringify({
       username, password
@@ -54,7 +55,7 @@ export default function Registration() {
       console.log(JSON.stringify(response.data));
       if(response.data.auth_token !== undefined) localStorage.setItem("auth-token", response.data.auth_token)
       localStorage.setItem("username", username)
-      console.log("login success")
+      navigate('/');
     })
     .catch(function (error) {
       console.log(error);
@@ -65,38 +66,39 @@ export default function Registration() {
 
   const handleSubmit = async (event)=>{
     event.preventDefault();
-    const data = JSON.stringify({username, email, first_name, student_id, password, phone})
-    console.log(data);
-    await Request.register(data)
-    .then((data) =>{
-      console.log("success")
-      console.log(data)
-    })
-    .catch((err) =>{
-      console.log(err);
-    })
+    // const data = JSON.stringify({username, email, first_name, student_id, password, phone})
+    // console.log(data);
+    // await Request.register(data)
+    // .then((data) =>{
+    //   console.log("success")
+    //   console.log(data)
+    // })
+    // .catch((err) =>{
+    //   console.log(err);
+    // })
 
     // var axios = require('axios');
-    // var data = JSON.stringify({
-    //   username, email, first_name, student_id, password, phone
-    // });
+    var data = JSON.stringify({
+      username, email, first_name, student_id, password, phone
+    });
 
-    // var config = {
-    // method: 'post',
-    // url: 'http://127.0.0.1:8000/users/',
-    // headers: { 
-    //  'Content-Type': 'application/json'
-    // },
-    // data : data
-    // };
+    var config = {
+    method: 'post',
+    url: 'http://127.0.0.1:8000/users/',
+    headers: { 
+     'Content-Type': 'application/json'
+    },
+    data : data
+    };
 
-    // axios(config)
-    // .then(function (response) {
-    //   console.log(JSON.stringify(response.data));
-    // })
-    // .catch(function (error) {
-    //   console.log(error);
-    // });
+    axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+      login();
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   }
 
   return (
@@ -136,6 +138,7 @@ export default function Registration() {
             </a>
           </p>
         </form>
+        
 
         {/* sign up form  */}
 
