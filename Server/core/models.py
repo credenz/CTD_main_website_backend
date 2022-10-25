@@ -1,12 +1,10 @@
-from secrets import choice
-from tkinter import CASCADE
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
-   
+    email = models.EmailField(unique=True)
     phone = models.IntegerField(null = True)
-    senior = models.BooleanField(default=False)
+    student_id = models.CharField(max_length = 11,null = False)
     
     def __str__(self):
         return str(self.username) + " PK: " + str(self.pk)

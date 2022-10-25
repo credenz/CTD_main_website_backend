@@ -1,5 +1,9 @@
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+from rest_framework.parsers import MultiPartParser
+from djoser.conf import django_settings
+from django.urls import reverse
+import requests
 
 from .serializers import *
 from .models import *
@@ -15,7 +19,9 @@ from django.conf import settings
 from django.template.loader import render_to_string
 
 class UserViewSet(viewsets.ViewSet):
-
+    # permission_classes = (AllowAny,)
+    # serializer_class = UserSerializer
+    # queryset = User.objects.all()
     # List All Users -- get method
     def list(self, request):
         users = User.objects.all()
@@ -35,7 +41,13 @@ class UserViewSet(viewsets.ViewSet):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
+        print(serializer.errors)
         return Response(serializer.errors)
+
+class UserRegisterView(generics.ListCreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [AllowAny]
 
 class AccountDetailView(APIView):
     serializer = UserSerializer
@@ -149,8 +161,21 @@ class PlaceOrder(APIView):
 
         return Response({'message': 'Order placed!!'}, status=201)
 
+def reset_user_password(request, uid, token):
+    if request.POST:
+        password = request.POST.get('password1')
+        payload = {'uid': uid, 'token': token, 'new_password': password}
 
+        url = '{0}://{1}{2}'.format(
+            django_settings.PROTOCOL, django_settings.DOMAIN, reverse('password_reset_confirm'))
 
+        response = requests.post(url, data=payload)
+        if response.status_code == 204:
+            # Give some feedback to the user. For instance:
+            # https://docs.djangoproject.com/en/2.2/ref/contrib/messages/
+            return Response("password reset", status = status.HTTP_204_NO_CONTENT)
+        else:
+            return Response(response.json())
 
 
 

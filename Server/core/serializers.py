@@ -6,7 +6,7 @@ from .models import *
 class UserSerializer(ModelSerializer):
     password = serializers.CharField(write_only=True, required=False)
     phone = serializers.IntegerField(write_only=True, required=False)
-    senior = serializers.NullBooleanField()
+    student_id = serializers.CharField(required=True)
 
     class Meta:
         model = User
@@ -18,7 +18,7 @@ class UserSerializer(ModelSerializer):
             'first_name',
             'last_name',
             'id',
-            'senior',
+            'student_id',
         ]
 
     def create(self,data):
@@ -41,3 +41,4 @@ class EventSerializer(serializers.ModelSerializer):
 class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Orders
+        fields = '__all__'
