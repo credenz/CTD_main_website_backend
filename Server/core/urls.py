@@ -19,7 +19,6 @@ from .views import *
 urlpatterns = [
     path('users/', UserViewSet.as_view(actions={'get': 'list', 'post': 'create'}), name = 'list-create-users'),
     path('users/<int:pk>', UserViewSet.as_view(actions={'get': 'retrieve'}), name = 'retrieve-user'),
-    # path('users/', UserRegisterView.as_view()),
     path('events/', EventsList.as_view()),
     path('events/<int:pk>', EventsDetail.as_view()),
     path('orders/', OrdersList.as_view()),

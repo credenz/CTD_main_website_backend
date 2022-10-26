@@ -16,7 +16,6 @@ class UserSerializer(ModelSerializer):
             'email',
             'phone',
             'first_name',
-            'last_name',
             'id',
             'student_id',
         ]
@@ -25,8 +24,8 @@ class UserSerializer(ModelSerializer):
         user = User.objects.create(
             username = data['username'],
             email = data['email'],
-            # first_name=data['first_name'],
-            # last_name = data['last_name']
+            first_name=data['first_name'],
+            student_id = data['student_id']
         )
         user.set_password(data['password'])
         user.save()

@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -137,17 +138,12 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
     ),
-
-    # 'DEFAULT_PARSER_CLASSES': (
-    #     'rest_framework.parsers.FormParser',
-    #     'rest_framework.parsers.MultiPartParser'
-    #  )
 }
 
 # Djoser Settings
 DJOSER = {
     'SEND_CONFIRMATION_EMAIL': True,
-    'PASSWORD_RESET_CONFIRM_URL': 'password-reset/{uid}/{token}',
+    'PASSWORD_RESET_CONFIRM_URL': 'auth/users/reset_password_confirm/?{uid}/?{token}',
     'PASSWORD_CHANGED_EMAIL_CONFIRMATION': True,
 }
 
@@ -160,8 +156,6 @@ CORS_ORIGIN_WHITELIST = (
 # SMTP config
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_HOST = 'localhost'
-# EMAIL_PORT = 1025
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True 
 
