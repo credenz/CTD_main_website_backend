@@ -1,0 +1,21 @@
+version: '3.2'
+
+services:
+  backend:
+    # restart: always
+    ports:
+      - "8000:8000"
+    container_name: back
+    command: gunicorn ctd_main_backend.wsgi:application --bind 0.0.0.0:8000 --timeout 1800
+    build:
+      context: ./Server/
+      dockerfile: Dockerfile
+    volumes:
+      - static_files:/user/src/app/staticfiles/
+      - ./Server/db.sqlite3:/user/src/app/db.sqlite3
+  
+    # env_file:
+    #   - ./server/.env/dev.env
+
+volumes:
+  static_files:
