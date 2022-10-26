@@ -17,14 +17,12 @@ const Contact = () => {
     ])
   return (
     <>
-    <div className="bg-c">
-  <div className="container ">
+    <div className="bg-c contact">
+  <div className="container contact ">
                 
-            <h1 className='text-glow' style={{marginTop:"70px"}}>CONTACT US</h1>
+            <h1 className='text-glow' style={{marginTop:"40px"}}>CONTACT US</h1>
 
-            <motion.h2  initial={{opacity:0}}
-            animate={{opacity:1}}
-            transition={{delay:0.5,duration:2.0}}> <p>We Are Here To Help</p> </motion.h2>
+         
 
            {contacts.map((contact)=>(
             <motion.div 

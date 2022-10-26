@@ -11,6 +11,7 @@ import Team from './Components/Team/Team';
 import Contact from './Components/Contact/Contact';
 import Footer from './Components/footer/Footer';
 import Registration from './Components/Registration/Registration'; 
+import Dashboard from './Components/dashboard/Dashboard';
 
 
 import { Routes,Route } from "react-router-dom";
@@ -26,6 +27,7 @@ const App = () => {
    <Route exact path="/contacts" element={ <Contact/> } />
    <Route exact path="/team" element={ <Team/> } />
    <Route exact path="/login" element={ <Registration/> } />
+   <Route exact path="/dashboard" element={ <Dashboard/> } />
   </Routes>
   <Footer/>
  

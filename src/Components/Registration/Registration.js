@@ -1,38 +1,26 @@
-
-import { FaUser, FaLock, FaUserSecret, FaPhoneAlt } from 'react-icons/fa';
+// import "./Registration.css";
+import { FaUser, FaLock, FaUserSecret, FaPhoneAlt, FaGoogle } from 'react-icons/fa';
 import { MdEmail, MdDriveFileRenameOutline } from 'react-icons/md'
-import React, { useRef, useState, useEffect } from "react";
-import {motion} from 'framer-motion';
+import React, { useRef, useState } from "react";
 
-export default function Registration() {
+
+export default function App() {
 
   const containerRef = useRef(null);
+  const [isClicked,setClicked] = useState(true) ;
 
-  function sign_up_btn() {
-    containerRef.current.classList.add("sign-up-mode");
-  }
-
-  function sign_in_btn() {
-    containerRef.current.classList.remove("sign-up-mode");
-  }
-
-  function sign_up_btn2() {
-    containerRef.current.classList.add("sign-up-mode2");
-  }
-
-  function sign_in_btn2() {
-    containerRef.current.classList.remove("sign-up-mode2");
-  }
+  const sign_up_btn = () => containerRef.current.classList.add("sign-up-mode");
+  const sign_in_btn = () => containerRef.current.classList.remove("sign-up-mode");
+  const sign_up_btn2 = () => containerRef.current.classList.add("sign-up-mode2");
+  const sign_in_btn2 = () => containerRef.current.classList.remove("sign-up-mode2");
 
   return (
     <div className="bg">
     <div className="login">
-    <motion.div initial={{opacity:0}}
-            animate={{opacity:1}}
-            transition={{delay:0.3,duration:1}} className="container" ref={containerRef}>
+    <div className="container" ref={containerRef}>
       <div className="signin-signup">
         <form action="" className="sign-in-form">
-          <h2 className="title">Sign in</h2>
+          <h2 className="title">{isClicked ? "Sign in" : "Set Password"}</h2>
 
           {/* username */}
           <div className="input-field">
@@ -48,20 +36,46 @@ export default function Registration() {
             <FaLock className="i" />
             <input type="password" placeholder="Password" />
           </div>
-          <input type="submit" value="Login" className="btn" />
+
+          {/* Confirm Password */}
+          <div className="input-field" style={{display : (isClicked ? "none" : "flex")}}>
+            <FaLock className="i" />
+            <input type="password" placeholder="Confirm Password" />
+          </div>
+
+          <input type="submit" value={isClicked ? "Login" : "Set Password"} className="btn" />
+
+          <p className="recover-text">
+            {isClicked ? "Forgot" : "Have"} password?{" "}
+            <a href="#" onClick={() => setClicked(!isClicked)}>
+              {isClicked ? "Set password" : "Sign in"}
+            </a>
+          </p>
 
           <p className="account-text">
             Don't have an account?{" "}
-            <a href="#" id="sign-up-btn2" onClick={() => sign_up_btn2()}>
+            <a href="#" id="sign-up-btn2" onClick={sign_up_btn2}>
               Sign up
             </a>
+            <br/>
+            {isClicked ? "Forgot" : "Have"} password?{" "}
+            <a href="#" onClick={() => setClicked(!isClicked)}>{isClicked ? "Set Password" : "Sign in"}</a>
           </p>
+
+          <p className="social-text">Or Sign in with social platform</p>
+          <div className="social-media">
+            <a href="#" className="social-icon">
+              <FaGoogle className="i"/>
+            </a>
+          </div>
+ 
         </form>
 
         {/* sign up form  */}
 
         <form action="" class="sign-up-form -rescale">
           <h2 className="title">Sign up</h2>
+
           <div className="input-field">
             <FaUser className="i" />
             <input
@@ -109,12 +123,14 @@ export default function Registration() {
 
           <p className="account-text">
             Already have an account?{" "}
-            <a href="#" id="sign-in-btn2" onClick={() => sign_in_btn2()}>
+            <a href="#" id="sign-in-btn2" onClick={sign_in_btn2}>
               Sign in
             </a>
           </p>
+
         </form>
       </div>
+
       <div className="panels-container">
         <div className="panel left-panel">
           <div className="content">
@@ -123,13 +139,7 @@ export default function Registration() {
               Great!!! you are a member now
               Come on board we are waiting for you ...
             </p>
-            <button
-              className="btn"
-              id="sign-in-btn"
-              onClick={() => sign_in_btn()}
-            >
-              Sign in
-            </button>
+            <button className="btn" id="sign-in-btn" onClick={sign_in_btn}>Sign in</button>
           </div>
         </div>
         <div className="panel right-panel">
@@ -139,16 +149,11 @@ export default function Registration() {
               Come join us on a wonderful journey on learning and collaborating to build new world!
               Let's go !!!
             </p>
-            <button
-              className="btn"
-              id="sign-up-btn"
-              onClick={() => sign_up_btn()}>
-              Sign up
-            </button>
+            <button className="btn" id="sign-up-btn" onClick={sign_up_btn}> Sign up </button>
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
     </div>
     </div>
   );

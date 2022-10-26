@@ -28,17 +28,14 @@ const Events = () => {
       //para:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore, totam velit? Iure nemo labore inventore?lorem500",
       butto:"Details",
       butto2:"Register",
-      info:`Bored with the same regular classes?\n 
-      Want to deep dive into the world of ciphers and puzzles?\n 
-      NTH got you covered! Network Treasure Hunt is an online version of a treasure hunt but with more adventure and riddles!\n 
-      Put on your thinking hats and join us in the event where LOGIC is all you can think of`,
-      rules:`1: All the puzzles will be displayed on nth.credenz.in \n
-       2: Each puzzle leads to a unique keyword. This keyword will take you to the next question.\n 
-       3: The Contest will show a real-time leaderboard for all players.\n 
-       4: After the contest is concluded, the first person on the leaderboard will be declared as the winner.\n 
-       5: It is a solo contest, hence any activity with teaming up is strictly restricted.`,
-      contact:`ABC : +91 1234 
-      DEF : +91 1234`,
+      info:"Bored with the same regular class?\n Want to deep dive into the world of ciphers and puzzles?\n  NTH got you covered! Network Treasure Hunt is an online version of a treasure hunt but with more adventure and riddles!\n  Put on your thinking hats and join us in the event where LOGIC is all you can think of",
+      rules1:"1: All the puzzles will be displayed on nth.credenz.in",
+      rules2: "2: Each puzzle leads to a unique keyword. This keyword will take you to the next question.", 
+      rules3:"3: The Contest will show a real-time leaderboard for all players." ,
+      rules4: "4: After the contest is concluded, the first person on the leaderboard will be declared as the winner.",
+      rules5: "5: It is a solo contest, hence any activity with teaming up is strictly restricted.",
+      contact1:"ABC : +91 1234",
+      contact2:"DEF : +91 1234",
       id:1
     },
     {
@@ -48,8 +45,12 @@ const Events = () => {
       butto:"Details",
       butto2:"Register",
       info:"The best algorithm is ten steps ahead of the second-best. So are you good enough to code the best one? National Computing Competition lets you test your coding skills with other coders. Sign Up to compete for the 'Overlord Coder' title and get a chance to experience real-world coding competition!",
-      rules:"1: The contest will contain 5-6 problems that need to be coded in C/C++/Python.\n 2: It will be individual competition hence teaming up is strictly restricted.\n 3: Marking scheme - Junior (+100, -0), Senior (+100, -50) (First value in brackets indicate marks for correct submission and second value in brackets indicate marks for wrong submission \n 4: The person who submits the most correct solutions will be considered WINNER.",
-      contact:"ABC : +91 1234 \n DEF : +91 1234",
+      rules1:"1: The contest will contain 5-6 problems that need to be coded in C/C++/Python.",
+      rules2:" 2: It will be individual competition hence teaming up is strictly restricted.",
+      rules3:"3: Marking scheme - Junior (+100, -0), Senior (+100, -50) (First value in brackets indicate marks for correct submission and second value in brackets indicate marks for wrong submission", 
+      rules4:"4: The person who submits the most correct solutions will be considered WINNER.",
+      contact1:"ABC : +91 1234",
+      contact2:"DEF : +91 1234",
       id:2
     },
     {
@@ -59,10 +60,15 @@ const Events = () => {
      butto:"Details",
      butto2:"Register",
      info:"Reverse Coding is a coding competition to analyze your problem solving ability with programming knowledge along with mathematical skills. Test your ability to decode the pattern through a decipher and code round in any of the languages - C, C++, Java and Python.",
-     rules:"1: The contest will contain 5-6 problems that need to be coded in C/C++/Python.\n 2: It will be individual competition hence teaming up is strictly restricted.\n 3: Marking scheme - Junior (+100, -0), Senior (+100, -50) (First value in brackets indicate marks for correct submission and second value in brackets indicate marks for wrong submission)\n 4: The person who submits the most correct solutions will be considered WINNER.",
-     contact:"ABC : +91 1234 \n DEF : +91 1234",
-      id:3
+     rules1:"1: The contest will contain 5-6 problems that need to be coded in C/C++/Python.",
+     rules2:" 2: It will be individual competition hence teaming up is strictly restricted.",
+     rules3:"3: Marking scheme - Junior (+100, -0), Senior (+100, -50) (First value in brackets indicate marks for correct submission and second value in brackets indicate marks for wrong submission", 
+     rules4:"4: The person who submits the most correct solutions will be considered WINNER.",
+     contact1:"ABC : +91 1234",
+     contact2:"DEF : +91 1234",
+     id:3
     },
+    
     // {
     //   image:Nth, 
     //   heade:"Nth", 
@@ -76,10 +82,10 @@ const Events = () => {
     <>
     <div className="bg-event">
     <div className="head text-center">
-            <h1 className='text-glow'>EVENTS</h1>
-        </div>
+        <h1 className='text-glow'>EVENTS</h1>
+    </div>
     <div className="container">
-        
+       
         {/* <div>
         LUMINANCE
     </div> */}
@@ -92,13 +98,15 @@ const Events = () => {
               <div className="content">
            {/* <h2>03</h2> */}
             <img style={{height:"150px"}} src={event.image} alt="" />
-            <h4>{event.heade}</h4>
+            <h3>{event.heade}</h3>
+            <div className="buttons">
               <button onClick={()=>changecontent(event)}>
                {event.butto}
               </button>
+              <br />
       {/* {isOpen && <Modal setIsOpen={setIsOpen} />} */}
             <a href="#">{event.butto2}</a>
-      
+            </div>
       </div>
     </div>
   </div>
@@ -106,10 +114,10 @@ const Events = () => {
            ))}
           </div>
           {popuptogle&&<div className="pop_up_container" onClick={changecontent}>
-            <motion.div 
-             initial={{y:"-200%"}}
-            animate={{y:0}}
-            transition={{ type:'tween', stiffness:10}}
+            <motion.div
+              initial={{opacity:0}}
+    animate={{opacity:1}}
+    transition={{delay:0.2,duration:0.3}}
              className="pop_up_body" onClick={(e)=>e.stopPropagation()}>
             <div className="pop_up_header">
               <button onClick={changecontent}>x</button>
@@ -131,10 +139,15 @@ const Events = () => {
           {pop.info}
         </div>
         <div  label="Rules">
-          {pop.rules}
+         {pop.rules1} <br/>
+          {pop.rules2}<br/>
+          {pop.rules3}<br/>
+          {pop.rules4}<br/>
+          {pop.rules5}<br/>
         </div>
         <div label="Contact">
-          {pop.contact}
+          {pop.contact1}<br/>
+          {pop.contact2}<br/>
         </div>
       </Tabs>
     {/* </div> */}
