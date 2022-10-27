@@ -103,7 +103,7 @@ export default function App() {
           {/* phone */}
           <div className="input-field">
             <FaPhoneAlt className="i" />
-            <input type="text" placeholder="Phone number" pattern="/(7|8|9)\d{9}/" ></input>
+            <input type="text" placeholder="Phone number" pattern="^\d{10}$" ></input>
           </div>
 
           {/* id */}
