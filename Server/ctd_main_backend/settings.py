@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-5^q7p#e911ps0!k@*auc(bd3d%%be$-o+hcv^yc10&uen4lfm(
 DEBUG = True
 
 ALLOWED_HOSTS = ['*', 'admin.ctd.pictieee.in', 'localhost', '127.0.0.0', '20.166.0.134']
-
+CSRF_TRUSTED_ORIGINS=['https://*.pictieee.in']
 
 # Application definition
 
