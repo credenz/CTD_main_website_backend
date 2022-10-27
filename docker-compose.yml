@@ -14,8 +14,8 @@ services:
       - static_files:/user/src/app/staticfiles/
       - ./Server/db.sqlite3:/user/src/app/db.sqlite3
   
-    # env_file:
-    #   - ./server/.env/dev.env
+    env_file:
+      - ./Server/.env/prod.env
 
 volumes:
   static_files:
