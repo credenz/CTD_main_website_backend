@@ -59,6 +59,13 @@ const Navbar = () => {
          <NavLink  className="nav-link text-white" to="/login">Login </NavLink>
         </li>
 
+        <li className="nav-item">
+         <NavLink  className="nav-link text-white" to="/">Logout </NavLink>
+        </li>
+
+        <li className="nav-item ">
+        <NavLink to="/dashboard"  rel="noreferrer"><i className="fa-solid fa-user user-icon"></i></NavLink>
+        </li>
     
         
        </ul>

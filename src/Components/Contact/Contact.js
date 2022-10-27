@@ -33,7 +33,7 @@ const Contact = () => {
             className="card" key={contact.id}>
                 <div className="content">
                     <div className="imgBx">
-                        <img src={contact.image} alt="Team 1" srcset=""/>
+                        <img srcSet={contact.image} alt="Team 1" />
                     </div>
                     <div className="contentBx">
                         <h3>{contact.headc}
@@ -57,6 +57,10 @@ const Contact = () => {
                 </li>
             </ul> --> */}
 
+{/*         
+            <iframe srcSet="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3462.7767542984584!2d73.84997668230555!3d18.45736744951612!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2eac85230ba47%3A0x871eddd0a8a0a108!2sSCTR&#39;S%20Pune%20Institute%20of%20Computer%20Technology!5e0!3m2!1sen!2sin!4v1666801940071!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> */}
+
+           
         </div>
         </div>
     </>
