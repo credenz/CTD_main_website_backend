@@ -2,6 +2,7 @@
 import { FaUser, FaLock, FaUserSecret, FaPhoneAlt, FaGoogle } from 'react-icons/fa';
 import { MdEmail, MdDriveFileRenameOutline } from 'react-icons/md'
 import React, { useRef, useState } from "react";
+import {motion} from 'framer-motion';
 
 
 export default function App() {
@@ -17,7 +18,11 @@ export default function App() {
   return (
     <div className="bg">
     <div className="login">
-    <div className="container" ref={containerRef}>
+    <motion.div
+     initial={{opacity:0}}
+    animate={{opacity:1}}
+    transition={{delay:0.3,duration:0.7}}
+     className="container" ref={containerRef}>
       <div className="signin-signup">
         <form action="" className="sign-in-form">
           <h2 className="title">{isClicked ? "Sign in" : "Set Password"}</h2>
@@ -153,7 +158,7 @@ export default function App() {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
     </div>
     </div>
   );

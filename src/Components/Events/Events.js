@@ -109,7 +109,11 @@ const Events = () => {
         <div className="head text-center">
           <h1 className="text-glow ">EVENTS</h1>
         </div>
-        <div className="container">
+        <motion.div 
+        initial={{opacity:0}}
+    animate={{opacity:1}}
+    transition={{delay:0.3,duration:1}}
+        className="container">
           {/* <div>
         LUMINANCE
     </div> */}
@@ -220,7 +224,7 @@ const Events = () => {
               </div>
             </div>
           )}
-        </div>
+        </motion.div>
       </div>
     </>
   );
