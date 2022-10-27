@@ -147,7 +147,7 @@ REST_FRAMEWORK = {
 # Djoser Settings
 DJOSER = {
     'SEND_CONFIRMATION_EMAIL': True,
-    'PASSWORD_RESET_CONFIRM_URL': 'auth/users/reset_password_confirm/?{uid}/?{token}',
+    'PASSWORD_RESET_CONFIRM_URL': 'reset_password_confirm/?{uid}/?{token}',
     'PASSWORD_CHANGED_EMAIL_CONFIRMATION': True,
 }
 
