@@ -77,6 +77,7 @@ export default function App() {
     .then(function (response) {
       console.log(JSON.stringify(response.data));
       toast.info("Reset link sent on your mail.")
+      navigate('/');
     })
     .catch(function (error) {
       toast.error("Unable to send reset link.")
@@ -86,7 +87,7 @@ export default function App() {
 
   const handleSubmit = async (event)=>{
     event.preventDefault();
-    toast.success("User registered successfully!");
+    
     var data = JSON.stringify({
       username, email, first_name, student_id, password, phone
     });
@@ -103,10 +104,20 @@ export default function App() {
     axios(config)
     .then(function (response) {
       console.log(JSON.stringify(response.data));
-      login();
+      console.log(typeof response.data.email);
+      console.log(typeof response.data.username);
+      if (typeof response.data.email === typeof []){
+        toast.error("Email already exists!");
+      }
+      else if (typeof response.data.username === typeof []){
+        toast.error("Username already exists!");
+      }
+      else {
+        toast.success("User Registration successful!")
+        login()};
     })
     .catch(function (error) {
-      console.log(error);
+      console.log()
     });
   }
 
@@ -116,7 +127,7 @@ export default function App() {
     <div className="container" ref={containerRef}>
       <div className="signin-signup">
         <form action="" className="sign-in-form" onSubmit={isClicked ?  login : sendResetLink}>
-          <h2 className="title">{isClicked ? "Sign in" : "Set Password"}</h2>
+          <h2 className="title">{isClicked ? "Sign in" : "Reset Password"}</h2>
 
           {/* email  */}
           <div className="input-field" style={{display : (isClicked ? "none" : "flex")}}>
@@ -126,17 +137,18 @@ export default function App() {
               placeholder="Enter Your Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-            />
+            required/>
           </div>
 
           {/* username  */}
-          <div className="input-field" style={{display : (isClicked ? "flex" : "none")}}>
+          <div className="input-field" style={{display : (isClicked ? "flex" : "none")}} >
             <FaUser className="i" />
             <input
               type="text"
               placeholder="Username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              required
             />
           </div>
 
@@ -145,7 +157,7 @@ export default function App() {
             <FaLock className="i" />
             <input type="password" placeholder="Password" 
             value={password}
-            onChange={(e) => setPassword(e.target.value)} />
+            onChange={(e) => setPassword(e.target.value)}  required/>
           </div>
 
           
@@ -156,12 +168,12 @@ export default function App() {
              onChange={(e) => setconfirm_password(e.target.value)}/>
           </div> */}
 
-          <input type="submit" value={isClicked ? "Login" : "Send Link"} className="btn" />
+          <input type="submit" value={isClicked ? "Login" : "Send Link"} className="btn"required />
 
           <p className="recover-text">
             {isClicked ? "Forgot" : "Have"} password?{" "}
             <a href="#" onClick={() => setClicked(!isClicked)}>
-              {isClicked ? "Set password" : "Sign in"}
+              {isClicked ? "Reset password" : "Sign in"}
             </a>
           </p>
 
@@ -197,6 +209,7 @@ export default function App() {
               placeholder="Username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              required
             />
           </div>
 
@@ -209,7 +222,7 @@ export default function App() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"
-            />
+              required/>
           </div>
 
           {/* full name */}
@@ -217,7 +230,7 @@ export default function App() {
             < MdDriveFileRenameOutline className="i --scale" />
             <input type="text" placeholder="Full name" 
             value={first_name}
-            onChange={(e) => setfirst_name(e.target.value)}></input>
+            onChange={(e) => setfirst_name(e.target.value)} required></input>
           </div>
 
           {/* phone */}
@@ -226,16 +239,17 @@ export default function App() {
             <input type="text" placeholder="Phone number" 
             pattern="^\d{10}$" 
             value={phone}
-            onChange={(e) => setPhone(e.target.value)}></input>
+            onChange={(e) => setPhone(e.target.value)} required></input>
           </div>
 
           {/* id */}
           <div className="input-field">
             <FaUserSecret className="i -scale" />
-            <input type="text" placeholder="Id" 
+            <input type="text" placeholder="PICT registration ID" 
             value={student_id}
             onChange={(e) => setstudent_id(e.target.value)}
-            ></input>
+            pattern="\(E2K|C2K|I2K)\d{8}$"
+            required></input>
           </div>
 
           {/* password */}
@@ -243,11 +257,11 @@ export default function App() {
             <FaLock className="i" />
             <input type="password" placeholder="Password" 
              value={password}
-             onChange={(e) => setPassword(e.target.value)}/>
+             onChange={(e) => setPassword(e.target.value)} required/>
           </div>
 
           {/* submit */}
-          <input type="submit" value="Sign up" className="btn" />
+          <input type="submit" value="Sign up" className="btn" required/>
 
           <p className="account-text">
             Already have an account?{" "}

@@ -259,7 +259,7 @@ const Events = () => {
                    {/* {If NTH} */}
                    {event.name === "NTH"  && !eventArray.includes(event.name) && 
                     <div>
-                    <a href="https://nth.pictieee.in/register/" target={"_blank"}  style={{border:"3px solid #66FF66"}} >
+                    <a href="https://nth.pictieee.in/register/" target={"_blank"}  style={{border:"3px solid #50BFE6"}} >
                       {event.butto2}
                     </a> 
                     </div> }

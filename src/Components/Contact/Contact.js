@@ -10,12 +10,6 @@ import { Col, Container, Row } from "react-bootstrap";
 
 const Contact = () => {
 
-    const location = {
-        address: '1600 Amphitheatre Parkway, Mountain View, california.',
-        lat: 37.42216,
-        lng: -122.08427,
-      }
-
     const[contacts, setContacts]= useState([
         
         {image:Img5, headc:"Siddhi Patil", number:<a href="tel://+917887371510"  style = {{ textDecoration:"none", color:"white" }}>+91 78873 71510</a>, id:2},
@@ -69,7 +63,7 @@ const Contact = () => {
 
            
         </div>
-        <Container fluid className='container-lower-contactUs'>
+        <Container fluid className='container-lower-contactUs contact-map'>
         <Row style={{ margin: 0 }}>
           <Col
             data-aos='fade-up'
