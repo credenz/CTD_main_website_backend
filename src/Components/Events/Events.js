@@ -144,7 +144,7 @@ const Events = () => {
         "4: Privately sharing code or data outside of teams is not permitted. Results should be reproducible to be eligible for prizes.",
       contact1: <a href="tel://+919028093133"  style = {{ textDecoration:"none", color:"white" }}>Manas Sewatkar :  +91 90280 93133</a>,
       contact2: <a href="tel://+919370546447"  style = {{ textDecoration:"none", color:"white" }}>Aditya Medhe :  +91 93705 46447</a>,
-      id: 2,
+      id: 3,
       name : "Datawiz"
     },
     // {
@@ -240,7 +240,7 @@ const Events = () => {
                     {/* {isOpen && <Modal setIsOpen={setIsOpen} />} */}
 
                     {/* {if not logged in} */}
-                    {!status && <div>
+                    {event.name !== "NTH" && !status && <div>
                      <Link to={`/login`} style={{border:"3px solid #50BFE6"}} onClick={()=>{
                       toast.info('Please log-in first!');
                      }}>
@@ -249,13 +249,20 @@ const Events = () => {
                     </div>}
 
                      {/* {logged in} */}
-                    {status && !eventArray.includes(event.name) && 
+                    {event.name !== "NTH" && status && !eventArray.includes(event.name) && 
                     <div>
                     <button  style={{border:"3px solid #66FF66"}} onClick={() => changecontenti(event)}>
                       {event.butto2}
                     </button> 
                     </div> }
                   
+                   {/* {If NTH} */}
+                   {event.name === "NTH"  && !eventArray.includes(event.name) && 
+                    <div>
+                    <a href="https://nth.pictieee.in/register/" target={"_blank"}  style={{border:"3px solid #66FF66"}} >
+                      {event.butto2}
+                    </a> 
+                    </div> }
                    
                   {/* registered button */}
 

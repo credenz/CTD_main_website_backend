@@ -1361,14 +1361,14 @@ body .container-e .card:nth-child(3) .box .content a {
   border-bottom: solid #ccc;
   border-width: 1px;
   list-style: none;
-  margin-bottom: -1px;
-  /* padding: 2rem 0.75rem; */
-  padding: 16px 12px;
+  margin-bottom: 10px;
+  padding: 0.5rem 3rem;
 }
 
 .tab-list{
-  padding: 0;
-  justify-content: space-between;
+  margin:0px;
+
+ 
 }
 
 .tab-list-active {
@@ -1378,7 +1378,17 @@ body .container-e .card:nth-child(3) .box .content a {
   border-width: 1px 1px 0 1px;
 }
 
-
+ @media (max-width:800px){
+  .tab-list-item {
+    display: inline-block;
+    list-style: none;
+    margin-bottom: -1px;
+    padding: 0.5rem 0.75rem;
+  }
+  .tab-list{
+    margin-bottom: 10px;
+  }
+ }
  @media (max-width:1030px) {
  .container-e {
     display: flex;
