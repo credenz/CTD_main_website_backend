@@ -1378,7 +1378,7 @@ body .container-e .card:nth-child(3) .box .content a {
   border-width: 1px 1px 0 1px;
 }
 
- @media (max-width:800px){
+ @media (max-width:1030px){
   .tab-list-item {
     display: inline-block;
     list-style: none;
