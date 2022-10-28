@@ -1,10 +1,22 @@
 // import "./Registration.css";
+import axios from "axios";
 import { FaUser, FaLock, FaUserSecret, FaPhoneAlt, FaGoogle } from 'react-icons/fa';
 import { MdEmail, MdDriveFileRenameOutline } from 'react-icons/md'
+import {Link, useNavigate, Navigate} from "react-router-dom";
 import React, { useRef, useState } from "react";
+import { toast } from "react-toastify";
 
 
 export default function App() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [first_name, setfirst_name] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState();
+  const [student_id, setstudent_id] = useState("");
+  const [confirm_password, setconfirm_password] = useState("");
+  const [error, setError] = useState("");
+  const navigate  = useNavigate();
 
   const containerRef = useRef(null);
   const [isClicked,setClicked] = useState(true) ;
@@ -14,36 +26,137 @@ export default function App() {
   const sign_up_btn2 = () => containerRef.current.classList.add("sign-up-mode2");
   const sign_in_btn2 = () => containerRef.current.classList.remove("sign-up-mode2");
 
+  const login = async (event)=>{
+    try {
+       event.preventDefault();
+    } catch (error) {
+      console.log(error)
+    }
+   
+    
+    var data = JSON.stringify({
+      username, password
+    });
+    
+    var config = {
+      method: 'post',
+      url: 'https://admin.ctd.pictieee.in/auth/token/login/',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+    axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+      if(response.data.auth_token !== undefined) localStorage.setItem("auth-token", response.data.auth_token)
+      localStorage.setItem("username", username)
+      toast.success("User logged in!");
+      navigate('/');
+    })
+    .catch(function (error) {
+      toast.error("Invalid Credentials!");
+      console.log(error);
+    });
+    
+  }
+
+  const sendResetLink = async (event) => {
+    event.preventDefault();
+    let data = {email}
+    var config = {
+      method: 'post',
+      url: 'https://admin.ctd.pictieee.in/auth/users/reset_password/',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+    
+    axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+      toast.info("Reset link sent on your mail.")
+    })
+    .catch(function (error) {
+      toast.error("Unable to send reset link.")
+      console.log(error);
+    });
+  }
+
+  const handleSubmit = async (event)=>{
+    event.preventDefault();
+    toast.success("User registered successfully!");
+    var data = JSON.stringify({
+      username, email, first_name, student_id, password, phone
+    });
+
+    var config = {
+    method: 'post',
+    url: 'https://admin.ctd.pictieee.in/users/',
+    headers: { 
+     'Content-Type': 'application/json'
+    },
+    data : data
+    };
+
+    axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+      login();
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
   return (
     <div className="bg">
     <div className="login">
     <div className="container" ref={containerRef}>
       <div className="signin-signup">
-        <form action="" className="sign-in-form">
+        <form action="" className="sign-in-form" onSubmit={isClicked ?  login : sendResetLink}>
           <h2 className="title">{isClicked ? "Sign in" : "Set Password"}</h2>
 
-          {/* username */}
-          <div className="input-field">
+          {/* email  */}
+          <div className="input-field" style={{display : (isClicked ? "none" : "flex")}}>
+            <FaUser className="i" />
+            <input
+              type="email"
+              placeholder="Enter Your Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+
+          {/* username  */}
+          <div className="input-field" style={{display : (isClicked ? "flex" : "none")}}>
             <FaUser className="i" />
             <input
               type="text"
               placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
             />
           </div>
 
-          {/* password */}
-          <div className="input-field">
+          
+          <div className="input-field" style={{display : (isClicked ? "flex" : "none")}}>
             <FaLock className="i" />
-            <input type="password" placeholder="Password" />
+            <input type="password" placeholder="Password" 
+            value={password}
+            onChange={(e) => setPassword(e.target.value)} />
           </div>
 
-          {/* Confirm Password */}
-          <div className="input-field" style={{display : (isClicked ? "none" : "flex")}}>
+          
+          {/* <div className="input-field" style={{display : (isClicked ? "none" : "flex")}}>
             <FaLock className="i" />
-            <input type="password" placeholder="Confirm Password" />
-          </div>
+            <input type="password" placeholder="Confirm Password" 
+             value={confirm_password}
+             onChange={(e) => setconfirm_password(e.target.value)}/>
+          </div> */}
 
-          <input type="submit" value={isClicked ? "Login" : "Set Password"} className="btn" />
+          <input type="submit" value={isClicked ? "Login" : "Send Link"} className="btn" />
 
           <p className="recover-text">
             {isClicked ? "Forgot" : "Have"} password?{" "}
@@ -62,18 +175,19 @@ export default function App() {
             <a href="#" onClick={() => setClicked(!isClicked)}>{isClicked ? "Set Password" : "Sign in"}</a>
           </p>
 
-          <p className="social-text">Or Sign in with social platform</p>
+          {/* <p className="social-text">Or Sign in with social platform</p>
           <div className="social-media">
             <a href="#" className="social-icon">
               <FaGoogle className="i"/>
             </a>
-          </div>
+          </div> */}
  
         </form>
+        
 
         {/* sign up form  */}
 
-        <form action="" class="sign-up-form -rescale">
+        <form action="" class="sign-up-form -rescale" onSubmit={handleSubmit}>
           <h2 className="title">Sign up</h2>
 
           <div className="input-field">
@@ -81,6 +195,8 @@ export default function App() {
             <input
               type="text"
               placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
             />
           </div>
 
@@ -90,6 +206,8 @@ export default function App() {
             <input
               type="text"
               placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"
             />
           </div>
@@ -97,25 +215,35 @@ export default function App() {
           {/* full name */}
           <div className="input-field">
             < MdDriveFileRenameOutline className="i --scale" />
-            <input type="text" placeholder="Full name" ></input>
+            <input type="text" placeholder="Full name" 
+            value={first_name}
+            onChange={(e) => setfirst_name(e.target.value)}></input>
           </div>
 
           {/* phone */}
           <div className="input-field">
             <FaPhoneAlt className="i" />
-            <input type="text" placeholder="Phone number" pattern="/(7|8|9)\d{9}/" ></input>
+            <input type="text" placeholder="Phone number" 
+            pattern="^\d{10}$" 
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}></input>
           </div>
 
           {/* id */}
           <div className="input-field">
             <FaUserSecret className="i -scale" />
-            <input type="text" placeholder="Id" ></input>
+            <input type="text" placeholder="Id" 
+            value={student_id}
+            onChange={(e) => setstudent_id(e.target.value)}
+            ></input>
           </div>
 
           {/* password */}
           <div className="input-field">
             <FaLock className="i" />
-            <input type="password" placeholder="Password" />
+            <input type="password" placeholder="Password" 
+             value={password}
+             onChange={(e) => setPassword(e.target.value)}/>
           </div>
 
           {/* submit */}
@@ -134,20 +262,18 @@ export default function App() {
       <div className="panels-container">
         <div className="panel left-panel">
           <div className="content">
-            <h3>Member of CTD?</h3>
+            <h3>Already registered?</h3>
             <p>
-              Great!!! you are a member now
-              Come on board we are waiting for you ...
+              Sign in to register for the events.
             </p>
             <button className="btn" id="sign-in-btn" onClick={sign_in_btn}>Sign in</button>
           </div>
         </div>
         <div className="panel right-panel">
           <div className="content">
-            <h3>New to CTD?</h3>
+            <h3>Haven't registered yet?</h3>
             <p>
-              Come join us on a wonderful journey on learning and collaborating to build new world!
-              Let's go !!!
+            Register now to participate in Credenz Tech Days 2022! 
             </p>
             <button className="btn" id="sign-up-btn" onClick={sign_up_btn}> Sign up </button>
           </div>

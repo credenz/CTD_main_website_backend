@@ -10,7 +10,7 @@ const Footer = () => {
 <p>@ PICT IEEE Student Branch</p>
 </div>
 <div className="row">
-<p>Developed By: <a href="/team" > <span ><strong> WEB TEAM </strong> </span></a> </p> 
+<p>Developed By: <a href="/team" style={{textDecoration : "underline"}}> <span ><strong> WEB TEAM </strong> </span></a> </p> 
 </div>
 <div className="row">
 <div className="row-i">

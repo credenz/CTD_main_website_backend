@@ -6,14 +6,21 @@ import Img3 from "../../images/contact/3.jpg"
 import Img4 from "../../images/contact/sanyog.jpg"
 import Img5 from "../../images/contact/siddhi.jpg"
 import Img6 from "../../images/contact/nidhi.jpg"
+import { Col, Container, Row } from "react-bootstrap";
 
 const Contact = () => {
 
+    const location = {
+        address: '1600 Amphitheatre Parkway, Mountain View, california.',
+        lat: 37.42216,
+        lng: -122.08427,
+      }
+
     const[contacts, setContacts]= useState([
         
-        {image:Img5, headc:"Siddhi Patil", number:"7887371510", id:2},
-        {image:Img4, headc:"Sanyog Kalantri", number:"7507034878", id:1},
-        {image:Img6, headc:"Nidhi Yadav", number:"8767887493", id:3},
+        {image:Img5, headc:"Siddhi Patil", number:<a href="tel://+917887371510"  style = {{ textDecoration:"none", color:"white" }}>+91 78873 71510</a>, id:2},
+        {image:Img4, headc:"Sanyog Kalantri", number:<a href="tel://+917507034878"  style = {{ textDecoration:"none", color:"white" }}>+91 75070 34878</a>, id:1},
+        {image:Img6, headc:"Nidhi Yadav", number:<a href="tel://+918767887493"  style = {{ textDecoration:"none", color:"white" }}>+91 87678 87493</a>, id:3},
     ])
   return (
     <>
@@ -39,7 +46,7 @@ const Contact = () => {
                         <h3>{contact.headc}
                         <br />
                       
-                        <span>Contact No- {contact.number}</span>
+                        <span>Contact No- {contact.number} </span>
                     </h3>
                     </div>
                 </div>
@@ -62,6 +69,33 @@ const Contact = () => {
 
            
         </div>
+        <Container fluid className='container-lower-contactUs'>
+        <Row style={{ margin: 0 }}>
+          <Col
+            data-aos='fade-up'
+            data-aos-duration='1000'
+            data-aos-delay='300'
+            style={{
+              height: "500px",
+              backgroundColor: "inherit",
+              padding: "0",
+            }}
+            className='d-flex justify-content-center'>
+            <iframe
+              title='googleMapsApi'
+              src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3784.5761897254206!2d73.84864491471969!3d18.457542087445745!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2eac85230ba47%3A0x871eddd0a8a0a108!2sSCTR&#39;S%20Pune%20Institute%20of%20Computer%20Technology!5e0!3m2!1sen!2sin!4v1604491302435!5m2!1sen!2sin'
+              width='100%'
+              height='100%'
+              frameBorder='0'
+              allowFullScreen=''
+              aria-hidden='false'
+              tabIndex='0'
+              className='shadow-lg google-maps width'></iframe>{" "}
+            {/* <Image src='https://source.unsplash.com/random/700x500' fluid /> */}
+          </Col>
+        </Row>
+      </Container>
+       
         </div>
     </>
    

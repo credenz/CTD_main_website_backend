@@ -1,18 +1,38 @@
 import React, { useState, useEffect } from "react";
+// import ReactDOM from 'react-dom';
+import { Link } from "react-router-dom";
 import Ncc from "../../images/ncc.png";
 import Rc from "../../images/rc.png";
+import dataw from "../../images/dataw.png"
 //import Inqu from "../../images/inqu.png";
 import Nth from "../../images/nth.png";
 //import Modal from "./Modal";
 //import styles from "./Modal.module.css";
 import Tabs from "./Tabs";
 import {motion} from 'framer-motion';
+import axios from "axios";
+import Loader from 'react-loaders';
+import { ToastContainer, toast } from 'react-toastify';
+import { isLogin } from "../utils/index";
+import ReactTooltip from 'react-tooltip';
 
 const Events = () => {
+
+  useEffect(() => {
+    fetchprofile();
+    setstatus(isLogin());
+  }, []);
+
+ 
+
   //const [isOpen, setIsOpen] = useState(false);
   const [popupcontent, setpopupcontent] = useState([]);
   const [popuptogle, setpopuptogle] = useState(false);
   const [styling, setstyling] = useState(null);
+  const [eventArray, seteventArray] = useState([]);
+  const [status, setstatus] = useState(false);
+  const [userProfile,setUserProfile] = useState(null);
+
   const changecontent = (events) => {
     setpopupcontent([events]);
     setpopuptogle(!popuptogle);
@@ -22,7 +42,7 @@ const Events = () => {
       setstyling(null);
     }
   };
-
+  
   const [popupcontenti, setpopupcontenti] = useState([]);
   const [popuptoglei, setpopuptoglei] = useState(false);
   // const [styling, setstyling] = useState(null);
@@ -50,9 +70,10 @@ const Events = () => {
         "4: After the contest is concluded, the first person on the leaderboard will be declared as the winner.",
       rules5:
         "5: It is a solo contest, hence any activity with teaming up is strictly restricted.",
-      contact1: "ABC : +91 1234",
-      contact2: "DEF : +91 1234",
-      id: 1,
+      contact1: <a href="tel://+918983594252"  style = {{ textDecoration:"none", color:"white" }}>Harsh Bhat :  +91 89835 94252</a>,
+      contact2: <a href="tel://+918208566035"  style = {{ textDecoration:"none", color:"white" }}>Devraj Shetake :  +91 82085 66305</a>,
+      id: 4,
+      name : "NTH",
     },
     {
       image: Ncc,
@@ -63,16 +84,21 @@ const Events = () => {
       butto3:"Registered",
       info: "The best algorithm is ten steps ahead of the second-best. So are you good enough to code the best one? National Computing Competition lets you test your coding skills with other coders. Sign Up to compete for the 'Overlord Coder' title and get a chance to experience real-world coding competition!",
       rules1:
-        "1: The contest will contain 5-6 problems that need to be coded in C/C++/Python.",
+        "1: Contest will contain 5-6 problems that need to be coded in Python, C++, or C.",
       rules2:
         " 2: It will be individual competition hence teaming up is strictly restricted.",
       rules3:
-        "3: Marking scheme - Junior (+100, -0), Senior (+100, -50) (First value in brackets indicate marks for correct submission and second value in brackets indicate marks for wrong submission",
+        "3: For the first correct submission of a question, you will receive the points currently available on that question.",
       rules4:
-        "4: The person who submits the most correct solutions will be considered WINNER.",
-      contact1: "ABC : +91 1234",
-      contact2: "DEF : +91 1234",
-      id: 2,
+        "4: For each wrong submission before the correct submission, 10 points will be deducted. If the question was already solved before, no points will be deducted for that question.",
+      rules5:
+        "5: Plagiarism checks would be done after the contest.",
+      rules6:
+        "6: The person who submits the most correct solutions will be considered WINNER.",
+        contact1: <a href="tel://+919822451588"  style = {{ textDecoration:"none", color:"white" }}>Jahan Chaware :  +91 98224 51588</a>,
+        contact2: <a href="tel://+917620573556"  style = {{ textDecoration:"none", color:"white" }}>Ruturaj Patil :  +91 76205 73556</a>,
+      id: 1,
+      name : "NCC",
     },
     {
       image: Rc,
@@ -84,16 +110,42 @@ const Events = () => {
       butto3:"Registered",
       info: "Reverse Coding is a coding competition to analyze your problem solving ability with programming knowledge along with mathematical skills. Test your ability to decode the pattern through a decipher and code round in any of the languages - C, C++, Java and Python.",
       rules1:
-        "1: The contest will contain 5-6 problems that need to be coded in C/C++/Python.",
+        "1: Contest will contain 5-6 problems that need to be coded in Python, C++, or C.",
       rules2:
         " 2: It will be individual competition hence teaming up is strictly restricted.",
       rules3:
-        "3: Marking scheme - Junior (+100, -0), Senior (+100, -50) (First value in brackets indicate marks for correct submission and second value in brackets indicate marks for wrong submission",
+        "3: For the first correct submission of a question, you will receive the points currently available on that question.",
       rules4:
-        "4: The person who submits the most correct solutions will be considered WINNER.",
-      contact1: "ABC : +91 1234",
-      contact2: "DEF : +91 1234",
-      id: 3,
+        "4: For each wrong submission before the correct submission, 10 points will be deducted. If the question was already solved before, no points will be deducted for that question.",
+      rules5:
+        "5: Plagiarism checks would be done after the contest.",
+      rules6:
+        "6: The person who submits the most correct solutions will be considered WINNER.",
+      contact1: <a href="tel://+919822451588"  style = {{ textDecoration:"none", color:"white" }}>Jahan Chaware :  +91 98224 51588</a>,
+      contact2: <a href="tel://+917620573556"  style = {{ textDecoration:"none", color:"white" }}>Ruturaj Patil :  +91 76205 73556</a>,
+      id: 2,
+      name : "RC"
+    },
+    {
+      image: dataw,
+      heade: "DataWiz",
+      butto: "Details",
+      butto2: "Register",
+
+      butto3:"Registered",
+      info: "Get ready to set off on a journey to the world of data science. DataWiz gives you an opportunity to test your machine learning and data analytics skills, work on datasets to analyse and make predictions using your models. Datawiz is a machine learning competition hosted on Kaggle.",
+      rules1:
+        "1: Each team of students may consist of a maximum of 3 participants. One account per participant",
+      rules2:
+        " 2: Signing In on Kaggle through Multiple accounts is prohibited.",
+      rules3:
+        "3: Submission Limits: You may submit a maximum of 10 entries per day. Final 2 submissions will be considered for judging.",
+      rules4:
+        "4: Privately sharing code or data outside of teams is not permitted. Results should be reproducible to be eligible for prizes.",
+      contact1: <a href="tel://+919028093133"  style = {{ textDecoration:"none", color:"white" }}>Manas Sewatkar :  +91 90280 93133</a>,
+      contact2: <a href="tel://+919370546447"  style = {{ textDecoration:"none", color:"white" }}>Aditya Medhe :  +91 93705 46447</a>,
+      id: 2,
+      name : "Datawiz"
     },
     // {
     //   image:Nth,
@@ -103,6 +155,61 @@ const Events = () => {
     //   id:4
     // },
   ]);
+
+
+
+  const placeOrder = (event) =>{
+    setpopuptoglei(false);
+    toast.success('Registration successful');
+
+    const event_id = event.id
+    var data = JSON.stringify({
+      event_id
+    });
+    
+    var config = {
+      method: 'post',
+      url: 'https://admin.ctd.pictieee.in/place_order/',
+      headers: { 
+        'Authorization': `Token ${localStorage.getItem("auth-token")}`, 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+    
+    axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+      fetchprofile();
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
+  const fetchprofile = () => {
+    var config = {
+      method: 'get',
+      url: 'https://admin.ctd.pictieee.in/account_detail/',
+      headers: { 
+        'Authorization': `Token ${localStorage.getItem("auth-token")}`
+      }
+    };
+    
+    axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+      return response.data
+    })
+    .then(function (data) {
+      seteventArray(data.events);
+      console.log(eventArray);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
   return (
     <>
       <div className="bg-event">
@@ -113,7 +220,7 @@ const Events = () => {
           {/* <div>
         LUMINANCE
     </div> */}
-
+          
           <div className="container-e" style={styling}>
             {events.map((event) => (
               <div className="card" key={event.id}>
@@ -122,6 +229,7 @@ const Events = () => {
                     {/* <h2>03</h2> */}
                     <img style={{ height: "150px" }} src={event.image} alt="" />
                     <h3>{event.heade}</h3>
+                   
                     
                     <div className="events-button">
                     <button onClick={() => changecontent(event)}>
@@ -130,15 +238,30 @@ const Events = () => {
                   
                  
                     {/* {isOpen && <Modal setIsOpen={setIsOpen} />} */}
-                    <button onClick={() => changecontenti(event)}>
+
+                    {/* {if not logged in} */}
+                    {!status && <div>
+                     <Link to={`/login`} style={{border:"3px solid #50BFE6"}} onClick={()=>{
+                      toast.info('Please log-in first!');
+                     }}>
+                      Register
+                      </Link>
+                    </div>}
+
+                     {/* {logged in} */}
+                    {status && !eventArray.includes(event.name) && 
+                    <div>
+                    <button  style={{border:"3px solid #66FF66"}} onClick={() => changecontenti(event)}>
                       {event.butto2}
-                    </button>
+                    </button> 
+                    </div> }
+                  
                    
                   {/* registered button */}
 
-                    {/* <button onClick={() => changecontenti(event)}>
+                    {eventArray.includes(event.name) && <button  style={{border:"3px solid #FD0E35"}} disabled>
                     {event.butto3}
-                    </button> */}
+                    </button>}
                     </div>
                   </div>
                 </div>
@@ -149,7 +272,7 @@ const Events = () => {
             <div className="pop_up_container" onClick={changecontent}>
               <div className="pop_up_body" onClick={(e) => e.stopPropagation()}>
                 <div className="pop_up_header">
-                  <button onClick={changecontent}>x</button>
+                  <button style={{backgroundColor : "transparent", color : "white", border : "0"}} onClick={changecontent}>x</button>
                 </div>
                 <div className="pop_up_content">
                   {popupcontent.map((pop) => {
@@ -198,7 +321,7 @@ const Events = () => {
              className="pop_up_container2" onClick={changecontenti}>
               <div className="pop_up_body2" onClick={(e) => e.stopPropagation()}>
                 <div className="pop_up_header2">
-                  <button onClick={changecontenti}>x</button>
+                  <button style={{backgroundColor : "transparent", color : "white", border : "0"}} onClick={changecontenti}>x</button>
                 </div>
                 <div className="pop_up_content2">
                   {popupcontenti.map((pop) => {
@@ -209,7 +332,7 @@ const Events = () => {
                         {/* <button className="btn_cancel">Cancel</button> */}
 
       {/*-------------- backend work for confirmation to register -------------------------------*/}
-                         <button className="btn_confirm"><a href="#">Confirm</a> </button>
+                         <button className="btn_confirm"><a href="#" onClick={()=>placeOrder(pop)}>Confirm</a></button> 
 
 
                         </div> 

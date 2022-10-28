@@ -5,6 +5,7 @@ import Img2 from "../../images/team/yash.jpg"
 import Img3 from "../../images/team/sanket.jpg"
 import Img4 from "../../images/team/shreyas.jpg"
 import Img5 from "../../images/team/harsh.jpg"
+import Img6 from "../../images/team/devraj.jpg"
 
 
 
@@ -45,6 +46,13 @@ const Team = () => {
       name:"Harsh Bhat",
       link:"https://www.linkedin.com/in/harshbhat/",
       id:5
+    },
+
+    {
+      image:Img6,
+      name:"Devraj Shetake",
+      link:"https://www.linkedin.com/in/devraj-shetake-439606206/",
+      id:6
     },
  
     
