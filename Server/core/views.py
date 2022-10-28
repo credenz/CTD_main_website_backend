@@ -1,5 +1,9 @@
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+from rest_framework.parsers import MultiPartParser
+from djoser.conf import django_settings
+from django.urls import reverse
+import requests
 
 from .serializers import *
 from .models import *
@@ -15,7 +19,6 @@ from django.conf import settings
 from django.template.loader import render_to_string
 
 class UserViewSet(viewsets.ViewSet):
-
     # List All Users -- get method
     def list(self, request):
         users = User.objects.all()
@@ -35,7 +38,13 @@ class UserViewSet(viewsets.ViewSet):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
+        print(serializer.errors)
         return Response(serializer.errors)
+
+class UserRegisterView(generics.ListCreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [AllowAny]
 
 class AccountDetailView(APIView):
     serializer = UserSerializer
@@ -43,22 +52,16 @@ class AccountDetailView(APIView):
 
     def get(self, request, **kwargs):
         data = {}
-        id = request.user.id
-        user = User.objects.filter(id=id).first()
-        profile = User.objects.filter(user=user.id).first()
-        data['phone_no'] = profile.phone_no
-        data['name'] = '{} {}'.format(user.first_name, user.last_name)
+        profile = User.objects.get(id = request.user.id)
+        data["username"] = profile.username
+        data['phone_no'] = profile.phone
+        data['name'] = profile.first_name
         data['email'] = profile.email
-        
-        if(profile.senior):
-            data['level'] = 'Senior'
-        else:
-            data['level'] = 'Junior'
 
-        orders = Orders.objects.filter(player_id=user.id)
-        events = {}
+        orders = Orders.objects.filter(player_id=request.user.id)
+        events = []
         for order in orders:
-            events[order.event_id.event_name]
+            events.append(order.event_id.event_name)
         data['events'] = events
         return Response(data, status=201)
 
@@ -125,21 +128,25 @@ class PlaceOrder(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
-
-        # template = render_to_string("templates\mail_template.html")
-
         event_id = request.data['event_id'] 
+        user = User.objects.get(id = request.user.id)
         event = Events.objects.get(pk=event_id)
         prev_order = Orders.objects.filter(player_id=request.user.id, event_id=event_id)
         if prev_order:
             return Response({'message': 'You have already registered!!'})  
-        password = 1234
         create_order = Orders(player_id=request.user, event_id=event)
         create_order.save()
 
+        template = render_to_string("core/mail_template.html", {
+            'name' : user.username,
+            'event' : event.event_name,
+            'start' : event.event_start,
+            'end' : event.event_end
+        })
+
         email = EmailMessage(
             'Thanks from PISB',
-            'body',
+            template,
             settings.EMAIL_HOST_USER,
             [request.user.email],
         )
@@ -149,8 +156,19 @@ class PlaceOrder(APIView):
 
         return Response({'message': 'Order placed!!'}, status=201)
 
+def reset_user_password(request, uid, token):
+    if request.POST:
+        password = request.POST.get('password1')
+        payload = {'uid': uid, 'token': token, 'new_password': password}
 
+        url = '{0}://{1}{2}'.format(
+            django_settings.PROTOCOL, django_settings.DOMAIN, reverse('password_reset_confirm'))
 
+        response = requests.post(url, data=payload)
+        if response.status_code == 204:
+            return Response("password reset", status = status.HTTP_204_NO_CONTENT)
+        else:
+            return Response(response.json())
 
 
 

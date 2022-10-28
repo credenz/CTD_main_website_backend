@@ -10,7 +10,7 @@ import Events from './Components/Events/Events';
 import Team from './Components/Team/Team';
 import Contact from './Components/Contact/Contact';
 import Footer from './Components/footer/Footer';
-import Login from './Components/login/Login';
+import Registration from './Components/Registration/Registration'; 
 
 
 import { Routes,Route } from "react-router-dom";
@@ -25,7 +25,7 @@ const App = () => {
    <Route exact path="/events" element={ <Events/> } />
    <Route exact path="/contacts" element={ <Contact/> } />
    <Route exact path="/team" element={ <Team/> } />
-   <Route exact path="/login" element={ <Login/> } />
+   <Route exact path="/login" element={ <Registration/> } />
   </Routes>
   <Footer/>
  

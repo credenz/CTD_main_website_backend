@@ -6,7 +6,7 @@ from .models import *
 class UserSerializer(ModelSerializer):
     password = serializers.CharField(write_only=True, required=False)
     phone = serializers.IntegerField(write_only=True, required=False)
-    senior = serializers.NullBooleanField()
+    student_id = serializers.CharField(required=True)
 
     class Meta:
         model = User
@@ -16,17 +16,16 @@ class UserSerializer(ModelSerializer):
             'email',
             'phone',
             'first_name',
-            'last_name',
             'id',
-            'senior',
+            'student_id',
         ]
 
     def create(self,data):
         user = User.objects.create(
             username = data['username'],
             email = data['email'],
-            # first_name=data['first_name'],
-            # last_name = data['last_name']
+            first_name=data['first_name'],
+            student_id = data['student_id']
         )
         user.set_password(data['password'])
         user.save()
@@ -41,3 +40,4 @@ class EventSerializer(serializers.ModelSerializer):
 class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Orders
+        fields = '__all__'

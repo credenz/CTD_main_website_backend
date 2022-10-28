@@ -10,18 +10,18 @@ const Footer = () => {
 <p>@ PICT IEEE Student Branch</p>
 </div>
 <div className="row">
-<p>Designed By: <a href="/team" > <span> WEB TEAM  </span></a> </p> 
+<p>Developed By: <a href="/team" > <span ><strong> WEB TEAM </strong> </span></a> </p> 
 </div>
 <div className="row">
 <div className="row-i">
 <div>
-<a href="#" target="_blank"><i className="fa-brands fa-linkedin "></i></a>
+<a href="https://www.linkedin.com/company/pisbieee/ " target="_blank" rel="noreferrer"><i className="fa-brands fa-linkedin "></i></a>
 </div>
 <div>
-<a href="https://www.instagram.com/pisbcredenz/" target="_blank"><i className="fa fa-instagram"></i></a>
+<a href ="https://instagram.com/pictieee?igshid=YmMyMTA2M2Y= " target="_blank" rel="noreferrer"><i className="fa fa-instagram"></i></a>
 </div>
 <div>
-<a href="https://www.facebook.com/pictieee/" target="_blank"><i className="fa fa-facebook "></i></a>
+<a href="https://m.facebook.com/pictieee/" target="_blank" rel="noreferrer"><i className="fa fa-facebook "></i></a>
 </div>
 </div>
 </div>

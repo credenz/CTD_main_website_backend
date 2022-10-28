@@ -1,12 +1,10 @@
-from secrets import choice
-from tkinter import CASCADE
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
-   
+    email = models.EmailField(unique=True)
     phone = models.IntegerField(null = True)
-    senior = models.BooleanField(default=False)
+    student_id = models.CharField(max_length = 11,null = False)
     
     def __str__(self):
         return str(self.username) + " PK: " + str(self.pk)
@@ -15,8 +13,8 @@ class Events(models.Model):
     event_name = models.CharField(max_length=255)
     event_description = models.CharField(max_length=255)
     event_id = models.CharField(max_length=255,default=101)
-    event_start = models.DateField()
-    event_end = models.DateField()
+    event_start = models.DateTimeField()
+    event_end = models.DateTimeField()
 
     def __str__(self):
         return str(self.event_name) + " pk = " + str(self.pk)
