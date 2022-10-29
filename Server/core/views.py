@@ -141,7 +141,8 @@ class PlaceOrder(APIView):
             'name' : user.username,
             'event' : event.event_name,
             'start' : event.event_start,
-            'end' : event.event_end
+            'end' : event.event_end,
+            'description' : event.event_description
         })
 
         email = EmailMessage(

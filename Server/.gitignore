@@ -2,3 +2,7 @@ venv
 *.pyc
 
 .env
+
+*.sqlite3
+
+/ctd_main_backend/settings.py
