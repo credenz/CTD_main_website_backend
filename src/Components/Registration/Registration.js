@@ -128,17 +128,15 @@ export default function App() {
       <div className="signin-signup">
         <form action="" className="sign-in-form" onSubmit={isClicked ?  login : sendResetLink}>
           <h2 className="title">{isClicked ? "Sign in" : "Reset Password"}</h2>
-
-{/*           
+          
           <div className="input-field" style={{display : (isClicked ? "none" : "flex")}}>
             <FaUser className="i" />
             <input
               type="email"
               placeholder="Enter Your Email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div> */}
+              onChange={(e) => setEmail(e.target.value)}/>
+          </div>
 
           {/* username  */}
           <div className="input-field" style={{display : (isClicked ? "flex" : "none")}} >
@@ -148,7 +146,6 @@ export default function App() {
               placeholder="Username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              required
             />
           </div>
 
@@ -157,7 +154,7 @@ export default function App() {
             <FaLock className="i" />
             <input type="password" placeholder="Password" 
             value={password}
-            onChange={(e) => setPassword(e.target.value)}  required/>
+            onChange={(e) => setPassword(e.target.value)}/>
           </div>
 
           

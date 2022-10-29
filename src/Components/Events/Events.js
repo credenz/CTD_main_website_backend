@@ -150,7 +150,7 @@ const Events = () => {
       timings: "04/11/22  12 AM to 06/11/22  12 Noon",
       timing:"Timings: ",
       rules1:
-        "1: Each team of students may consist of a maximum of 3 participants. One account per participant",
+        "1: Each team of students may consist of a maximum of 2 participants. One account per participant",
       rules2:
         " 2: Signing In on Kaggle through Multiple accounts is prohibited.",
       rules3:
