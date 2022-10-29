@@ -16,13 +16,13 @@ import Dashboard from './Components/dashboard/Dashboard';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Home1 from './Background/script';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 
 import { Routes,Route} from "react-router-dom";
 const App = () => {
   return (
     <>
-    <Navbar/>
     <ToastContainer
      position="top-right"
       autoClose={3000}
@@ -33,7 +33,7 @@ const App = () => {
       theme = "dark"
       style={{fontSize:'15px'}}    
       />
-    
+    <Navbar/>
     <Routes>
    <Route exact path="/" element={<Home/> } />
    <Route exact path="/about" element={ <About/> } />
@@ -44,6 +44,7 @@ const App = () => {
    <Route exact path="/dashboard" element={ <Dashboard/> } />
    <Route exact path="/reset_password_confirm/" element={ <ResetPassword/> } />
   </Routes> 
+   
   <Footer/>
   
  
