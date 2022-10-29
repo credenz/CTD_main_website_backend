@@ -37,6 +37,7 @@ const Dashboard = () => {
       setEmail(response.data.email);
       setPhone(response.data.phone);
       setevents(response.data.events);
+      console.log(events);
     })
     .catch(function (error) {
       console.log(error);
@@ -70,6 +71,8 @@ const Dashboard = () => {
     
     <div className="selected-events">
     <ul>
+     {events.length === 0 && <li>No events registered yet!</li>}
+
     {events.map((event) => (
               <li>{event}</li>
             ))}

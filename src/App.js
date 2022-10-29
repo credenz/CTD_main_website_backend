@@ -18,24 +18,22 @@ import 'react-toastify/dist/ReactToastify.css';
 import Home1 from './Background/script';
 
 
-import { Routes,Route } from "react-router-dom";
+import { Routes,Route} from "react-router-dom";
 const App = () => {
   return (
     <>
-
     <Navbar/>
     <ToastContainer
      position="top-right"
       autoClose={3000}
-      // hideProgressBar={false}
       hideProgressBar
       newestOnTop={false}
       closeOnClick
       draggable
-      // pauseOnHover
       theme = "dark"
       style={{fontSize:'15px'}}    
       />
+    
     <Routes>
    <Route exact path="/" element={<Home/> } />
    <Route exact path="/about" element={ <About/> } />
@@ -45,8 +43,9 @@ const App = () => {
    <Route exact path="/login" element={ <Registration/> } />
    <Route exact path="/dashboard" element={ <Dashboard/> } />
    <Route exact path="/reset_password_confirm/" element={ <ResetPassword/> } />
-  </Routes>
+  </Routes> 
   <Footer/>
+  
  
     </>
    

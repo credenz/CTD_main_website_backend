@@ -29,7 +29,7 @@ export default function App() {
         return;
     }
     let url = window.location.href;
-    console.log(url.split("/?"))
+    // console.log(url.split("/?"))
     let urlTokens = url.split("/?")
     if(urlTokens.length !== 3){
       toast.error("Invalid Reset Link!");
@@ -39,13 +39,13 @@ export default function App() {
     let uid = urlTokens[1];
     let token = urlTokens[2];
     token = token[token.length -1] === '/' ? token.slice(0,token.length-1) : token;
-    console.log(token);
+    // console.log(token);
 
     var data = JSON.stringify({
       uid, token, new_password : pass1
     });
-    console.log(data);
-    console.log(localStorage.getItem("auth-token"), "auth token")
+    // console.log(data);
+    // console.log(localStorage.getItem("auth-token"), "auth token")
     var config = {
       method: 'post',
       url: 'https://admin.ctd.pictieee.in/auth/users/reset_password_confirm/',
@@ -58,12 +58,12 @@ export default function App() {
     
     axios(config)
     .then(function (response) {
-      console.log(JSON.stringify(response.data));
+      // console.log(JSON.stringify(response.data));
       toast.success("Password was reset.")
       navigate('/login')
     })
     .catch(function (error) {
-      console.log(error);
+      // console.log(error);
       toast.error("Unable to reset password at the moment.")
       navigate('/')
     });

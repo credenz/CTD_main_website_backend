@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Spinner from 'react-bootstrap/Spinner';
 // import ReactDOM from 'react-dom';
 import { Link } from "react-router-dom";
 import Ncc from "../../images/ncc.png";
@@ -60,7 +61,11 @@ const Events = () => {
       butto: "Details",
       butto2: "Register",
       butto3:"Registered",
-      info: "Bored with the same regular class?\n Want to deep dive into the world of ciphers and puzzles?\n  NTH got you covered! Network Treasure Hunt is an online version of a treasure hunt but with more adventure and riddles!\n  Put on your thinking hats and join us in the event where LOGIC is all you can think of",
+      info: "Bored with the same regular class?\n Want to deep dive into the world of ciphers and puzzles?\n  NTH got you covered! Network Treasure Hunt is an online version of a treasure hunt but with more adventure and riddles!\n  Put on your thinking hats and join us in the event where LOGIC is all you can think of\n ",
+      timing:
+      "Timings: ",
+      timings:
+      "11/11/22  9 PM to 12/11/22  8:59 PM",
       rules1: "1: All the puzzles will be displayed on nth.credenz.in",
       rules2:
         "2: Each puzzle leads to a unique keyword. This keyword will take you to the next question.",
@@ -83,6 +88,10 @@ const Events = () => {
       butto2: "Register",
       butto3:"Registered",
       info: "The best algorithm is ten steps ahead of the second-best. So are you good enough to code the best one? National Computing Competition lets you test your coding skills with other coders. Sign Up to compete for the 'Overlord Coder' title and get a chance to experience real-world coding competition!",
+      timing:
+      "Timings: ",
+      timings: 
+      "05/11/22  4 PM to 05/11/22  6 PM",
       rules1:
         "1: Contest will contain 5-6 problems that need to be coded in Python, C++, or C.",
       rules2:
@@ -109,6 +118,10 @@ const Events = () => {
 
       butto3:"Registered",
       info: "Reverse Coding is a coding competition to analyze your problem solving ability with programming knowledge along with mathematical skills. Test your ability to decode the pattern through a decipher and code round in any of the languages - C, C++, Java and Python.",
+      timing:
+      "Timings: ",
+      timings: 
+      "06/11/22  11 AM to 06/11/22  1 PM",
       rules1:
         "1: Contest will contain 5-6 problems that need to be coded in Python, C++, or C.",
       rules2:
@@ -134,6 +147,8 @@ const Events = () => {
 
       butto3:"Registered",
       info: "Get ready to set off on a journey to the world of data science. DataWiz gives you an opportunity to test your machine learning and data analytics skills, work on datasets to analyse and make predictions using your models. Datawiz is a machine learning competition hosted on Kaggle.",
+      timings: "04/11/22  12 AM to 06/11/22  12 Noon",
+      timing:"Timings: ",
       rules1:
         "1: Each team of students may consist of a maximum of 3 participants. One account per participant",
       rules2:
@@ -159,8 +174,9 @@ const Events = () => {
 
 
   const placeOrder = (event) =>{
+  
     setpopuptoglei(false);
-    toast.success('Registration successful');
+    toast.success('Registration successful. Confirmation mail sent');
 
     const event_id = event.id
     var data = JSON.stringify({
@@ -216,7 +232,7 @@ const Events = () => {
         <div className="head text-center">
           <h1 className="text-glow ">EVENTS</h1>
         </div>
-        <div className="container">
+        <div className="container-fluid">
           {/* <div>
         LUMINANCE
     </div> */}
@@ -257,9 +273,17 @@ const Events = () => {
                     </div> }
                   
                    {/* {If NTH} */}
-                   {event.name === "NTH"  && !eventArray.includes(event.name) && 
+                   {event.name === "NTH" && !status && !eventArray.includes(event.name) && 
                     <div>
                     <a href="https://nth.pictieee.in/register/" target={"_blank"}  style={{border:"3px solid #50BFE6"}} >
+                      {event.butto2}
+                    </a> 
+                    </div> }
+
+                    {/* {If NTH and logged in} */}
+                   {event.name === "NTH"  && status && !eventArray.includes(event.name) && 
+                    <div>
+                    <a href="https://nth.pictieee.in/register/" target={"_blank"}  style={{border:"3px solid #66FF66"}} >
                       {event.butto2}
                     </a> 
                     </div> }
@@ -293,7 +317,11 @@ const Events = () => {
                     <div> */}
                         <h1>{pop.heade}</h1>
                         <Tabs>
-                          <div label="Details">{pop.info}</div>
+                          <div label="Details">
+                            {pop.info} <br />
+                            {pop.timing}<br />
+                            {pop.timings}<br />
+                          </div>
                           <div label="Rules">
                             {pop.rules1} <br />
                             {pop.rules2}

@@ -30,7 +30,7 @@ export default function App() {
     try {
        event.preventDefault();
     } catch (error) {
-      console.log(error)
+      // // console.log(error)
     }
    
     
@@ -48,7 +48,7 @@ export default function App() {
     };
     axios(config)
     .then(function (response) {
-      console.log(JSON.stringify(response.data));
+      // // console.log(JSON.stringify(response.data));
       if(response.data.auth_token !== undefined) localStorage.setItem("auth-token", response.data.auth_token)
       localStorage.setItem("username", username)
       toast.success("User logged in!");
@@ -56,7 +56,7 @@ export default function App() {
     })
     .catch(function (error) {
       toast.error("Invalid Credentials!");
-      console.log(error);
+      // console.log(error);
     });
     
   }
@@ -75,13 +75,13 @@ export default function App() {
     
     axios(config)
     .then(function (response) {
-      console.log(JSON.stringify(response.data));
+      // // console.log(JSON.stringify(response.data));
       toast.info("Reset link sent on your mail.")
       navigate('/');
     })
     .catch(function (error) {
       toast.error("Unable to send reset link.")
-      console.log(error);
+      // // console.log(error);
     });
   }
 
@@ -103,9 +103,9 @@ export default function App() {
 
     axios(config)
     .then(function (response) {
-      console.log(JSON.stringify(response.data));
-      console.log(typeof response.data.email);
-      console.log(typeof response.data.username);
+      // // console.log(JSON.stringify(response.data));
+      // // console.log(typeof response.data.email);
+      // // console.log(typeof response.data.username);
       if (typeof response.data.email === typeof []){
         toast.error("Email already exists!");
       }
@@ -117,7 +117,7 @@ export default function App() {
         login()};
     })
     .catch(function (error) {
-      console.log()
+      // // console.log()
     });
   }
 
@@ -129,7 +129,7 @@ export default function App() {
         <form action="" className="sign-in-form" onSubmit={isClicked ?  login : sendResetLink}>
           <h2 className="title">{isClicked ? "Sign in" : "Reset Password"}</h2>
 
-          {/* email  */}
+{/*           
           <div className="input-field" style={{display : (isClicked ? "none" : "flex")}}>
             <FaUser className="i" />
             <input
@@ -137,8 +137,8 @@ export default function App() {
               placeholder="Enter Your Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-            required/>
-          </div>
+            />
+          </div> */}
 
           {/* username  */}
           <div className="input-field" style={{display : (isClicked ? "flex" : "none")}} >
@@ -245,10 +245,10 @@ export default function App() {
           {/* id */}
           <div className="input-field">
             <FaUserSecret className="i -scale" />
-            <input type="text" placeholder="PICT registration ID" 
+            <input type="text" placeholder="PICT registration ID (E2K...)" 
             value={student_id}
             onChange={(e) => setstudent_id(e.target.value)}
-            pattern="\(E2K|C2K|I2K)\d{8}$"
+            pattern="(E2K|C2K|I2K|e2k|i2k|c2k)\d{8}$"
             required></input>
           </div>
 
