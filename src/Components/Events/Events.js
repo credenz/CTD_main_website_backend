@@ -82,7 +82,7 @@ const Events = () => {
     },
     {
       image: Ncc,
-      heade: "National Computing Contest",
+      heade: "Network Computing Contest",
       // para:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore, totam velit? Iure nemo labore inventore?lorem500",
       butto: "Details",
       butto2: "Register",
