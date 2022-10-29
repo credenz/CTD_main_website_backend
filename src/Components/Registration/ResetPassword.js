@@ -211,11 +211,11 @@ export default function App() {
         </div>
         <div className="panel right-panel">
           <div className="content">
-            <h3>Haven't registered yet?</h3>
+            <h3>Know your credentials?</h3>
             <p>
-              Register now to participate in Credenz Tech Days 2022! 
+              Log in now to register for our events!
             </p>
-            <button className="btn" id="sign-up-btn" onClick={sign_up_btn}> Sign up </button>
+            <Link className="btn" id="sign-up-btn" to="/login"> Sign in </Link>
           </div>
         </div>
       </div>
