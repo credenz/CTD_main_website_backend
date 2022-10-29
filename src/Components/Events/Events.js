@@ -56,7 +56,7 @@ const Events = () => {
   const [events, setEvent] = useState([
     {
       image: Nth,
-      heade: "National Treasure Hunt",
+      heade: "Network Treasure Hunt",
       //para:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore, totam velit? Iure nemo labore inventore?lorem500",
       butto: "Details",
       butto2: "Register",
@@ -82,7 +82,7 @@ const Events = () => {
     },
     {
       image: Ncc,
-      heade: "Network Computing Contest",
+      heade: "National Computing Contest",
       // para:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore, totam velit? Iure nemo labore inventore?lorem500",
       butto: "Details",
       butto2: "Register",
