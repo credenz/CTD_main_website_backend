@@ -5,6 +5,7 @@ import React, { useRef, useState } from "react";
 import { toast } from "react-toastify";
 import axios from 'axios';
 import {Link, useNavigate, Navigate} from "react-router-dom";
+import { logout } from '../utils';
 
 
 export default function App() {
@@ -59,6 +60,7 @@ export default function App() {
     axios(config)
     .then(function (response) {
       // console.log(JSON.stringify(response.data));
+      logout();
       toast.success("Password was reset.")
       navigate('/login')
     })
