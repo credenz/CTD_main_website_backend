@@ -146,7 +146,7 @@ class PlaceOrder(APIView):
         })
 
         email = EmailMessage(
-            'Thanks from PISB',
+            f'CTD: {event.event_name} Registration Confirmation.',
             template,
             settings.EMAIL_HOST_USER,
             [request.user.email],
