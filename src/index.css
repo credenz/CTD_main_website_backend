@@ -2112,6 +2112,7 @@ to align it properly */
   opacity: 0;
   transition: 0.5s ease-in-out;
   transition-delay: 1s;
+  height : 100%;
 }
 
 .login .title {
@@ -2316,6 +2317,7 @@ to align it properly */
   .login .container.sign-up-mode2 form.sign-up-form {
     display: flex;
     opacity: 1;
+    height : 100%;
   }
   .login .container.sign-up-mode2 form.sign-in-form {
     display: none;
@@ -2341,7 +2343,21 @@ to align it properly */
   width: 91vw;
   height: 75vh;
 }
-  
+.login .input-field input {
+  flex: 5 1;
+  background: none;
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 14px;
+  font-weight: 600;
+  color: #444;
+}
+.login .title {
+  font-size: 32px;
+  color: #1B2735;
+  margin-bottom: 10px;
+}  
 }
 
 @media (max-width: 330px) {

@@ -27,10 +27,9 @@ const Contact = () => {
 
            {contacts.map((contact)=>(
             <motion.div 
-              initial={{scale:0}}
-            animate={{scale:1}}
-            transition={{delay:0.3,duration:1}}
-            whileHover={{scale:1.1}}
+            initial={{opacity:0}}
+            animate={{opacity:1}}
+            transition={{delay:0.2,duration:0.3}}
             className="card" key={contact.id}>
                 <div className="content">
                     <div className="imgBx">

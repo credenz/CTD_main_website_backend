@@ -1,4 +1,5 @@
 // import "./Registration.css";
+import {motion} from 'framer-motion';
 import axios from "axios";
 import { FaUser, FaLock, FaUserSecret, FaPhoneAlt, FaGoogle } from 'react-icons/fa';
 import { MdEmail, MdDriveFileRenameOutline } from 'react-icons/md'
@@ -124,7 +125,11 @@ export default function App() {
   return (
     <div className="bg">
     <div className="login">
-    <div className="container" ref={containerRef}>
+    <motion.div 
+    initial={{opacity:0}}
+    animate={{opacity:1}}
+    transition={{delay:0.2,duration:0.3}}
+    className="container" ref={containerRef}>
       <div className="signin-signup">
         <form action="" className="sign-in-form" onSubmit={isClicked ?  login : sendResetLink}>
           <h2 className="title">{isClicked ? "Sign in" : "Reset Password"}</h2>
@@ -290,7 +295,7 @@ export default function App() {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
     </div>
     </div>
   );
