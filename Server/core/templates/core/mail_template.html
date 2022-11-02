@@ -4,10 +4,10 @@ Thank you for registering in {{event}}.
 
 Details of this event are as follows:
 {{description}}
-
+{% if event == "Datawiz" %}
 Start - {{start}}
-End - {{end}}
-
+End - {{end}}{% else %} Date - {{start}}
+{% endif %}
 Futhur details will be shared soon.
 
 In case of any technical difficulties or questions reach out to us through:
@@ -15,20 +15,17 @@ In case of any technical difficulties or questions reach out to us through:
 Contact:
 Jahan Chaware: 9822451588
 Tanisha Pareekh: 9175643973
-Email: pictieeestudentbranch2022@gmail.com
-{% endif %}
-{% if event == "RC" %}
+Email: pictieeestudentbranch2022@gmail.com{% endif %}{% if event == "RC" %}
 Contact:
 Jahan Chaware: 9822451588
 Abhijeet Raotole: 9175830423
-Email: pictieeestudentbranch2022@gmail.com
-{% endif %}
-{% if event == "Datawiz" %}
+Email: pictieeestudentbranch2022@gmail.com{% endif %}{% if event == "Datawiz" %}
 Contact:
 Manas Sewatkar: 9028093133
 Aditya Medhe: 9370546447
 Email: pictieeestudentbranch2022@gmail.com
-{% endif %}All the best!
+{% endif %}
+All the best!
 
 Regards,
 PICT IEEE student branch.
