@@ -143,9 +143,9 @@ const Events = () => {
       image: dataw,
       heade: "DataWiz",
       butto: "Details",
-      butto2: "Register",
+      butto2: "Registration closed",
 
-      butto3:"Registered",
+      butto3:"Registration closed",
       info: "Get ready to set off on a journey to the world of data science. DataWiz gives you an opportunity to test your machine learning and data analytics skills, work on datasets to analyse and make predictions using your models. Datawiz is a machine learning competition hosted on Kaggle.",
       timings: "04/11/22  12 AM to 06/11/22  12 Noon",
       timing:"Timings: ",
@@ -256,7 +256,7 @@ const Events = () => {
                     {/* {isOpen && <Modal setIsOpen={setIsOpen} />} */}
 
                     {/* {if not logged in} */}
-                    {event.name !== "NTH" && !status && <div>
+                    {event.name !== "NTH" && event.name !== "Datawiz" && !status && <div>
                      <Link to={`/login`} style={{border:"3px solid #50BFE6"}} onClick={()=>{
                       toast.info('Please log-in first!');
                      }}>
@@ -265,7 +265,7 @@ const Events = () => {
                     </div>}
 
                      {/* {logged in} */}
-                    {event.name !== "NTH" && status && !eventArray.includes(event.name) && 
+                    {event.name !== "NTH" && event.name !== "Datawiz" && status && !eventArray.includes(event.name) && 
                     <div>
                     <button  style={{border:"3px solid #66FF66"}} onClick={() => changecontenti(event)}>
                       {event.butto2}
@@ -284,6 +284,22 @@ const Events = () => {
                    {event.name === "NTH"  && status && !eventArray.includes(event.name) && 
                     <div>
                     <a href="https://nth.pictieee.in/register/" target={"_blank"}  style={{border:"3px solid #66FF66"}} >
+                      {event.butto2}
+                    </a> 
+                    </div> }
+
+                     {/* {If Datawiz} */}
+                   {event.name === "Datawiz" && !status && !eventArray.includes(event.name) && 
+                    <div>
+                    <a style={{border:"3px solid #FFEB00"}} disabled>
+                      {event.butto2}
+                    </a> 
+                    </div> }
+
+                    {/* {If Datawiz and logged in} */}
+                   {event.name === "Datawiz"  && status && !eventArray.includes(event.name) && 
+                    <div>
+                    <a  style={{border:"3px solid #FFEB00"}} disabled>
                       {event.butto2}
                     </a> 
                     </div> }
