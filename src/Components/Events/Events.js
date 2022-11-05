@@ -85,8 +85,8 @@ const Events = () => {
       heade: "National Computing Contest",
       // para:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore, totam velit? Iure nemo labore inventore?lorem500",
       butto: "Details",
-      butto2: "Register",
-      butto3:"Registered",
+      butto2: "Registration closed",
+      butto3:"Registration closed",
       info: "The best algorithm is ten steps ahead of the second-best. So are you good enough to code the best one? National Computing Competition lets you test your coding skills with other coders. Sign Up to compete for the 'Overlord Coder' title and get a chance to experience real-world coding competition!",
       timing:
       "Timings: ",
@@ -256,7 +256,7 @@ const Events = () => {
                     {/* {isOpen && <Modal setIsOpen={setIsOpen} />} */}
 
                     {/* {if not logged in} */}
-                    {event.name !== "NTH" && event.name !== "Datawiz" && !status && <div>
+                    {event.name !== "NTH" && event.name !== "Datawiz" && event.name !== "NCC" && !status && <div>
                      <Link to={`/login`} style={{border:"3px solid #50BFE6"}} onClick={()=>{
                       toast.info('Please log-in first!');
                      }}>
@@ -265,7 +265,7 @@ const Events = () => {
                     </div>}
 
                      {/* {logged in} */}
-                    {event.name !== "NTH" && event.name !== "Datawiz" && status && !eventArray.includes(event.name) && 
+                    {event.name !== "NTH" && event.name !== "Datawiz" && event.name !== "NCC" && status && !eventArray.includes(event.name) && 
                     <div>
                     <button  style={{border:"3px solid #66FF66"}} onClick={() => changecontenti(event)}>
                       {event.butto2}
@@ -288,16 +288,16 @@ const Events = () => {
                     </a> 
                     </div> }
 
-                     {/* {If Datawiz} */}
-                   {event.name === "Datawiz" && !status && !eventArray.includes(event.name) && 
+                     {/* {If Datawiz, NCC} */}
+                   {(event.name === "Datawiz" || event.name === "NCC") && !status && !eventArray.includes(event.name) && 
                     <div>
                     <a style={{border:"3px solid #FFEB00"}} disabled>
                       {event.butto2}
                     </a> 
                     </div> }
 
-                    {/* {If Datawiz and logged in} */}
-                   {event.name === "Datawiz"  && status && !eventArray.includes(event.name) && 
+                    {/* {If Datawiz, NCC and logged in} */}
+                   {(event.name === "Datawiz"  || event.name === "NCC")  && status && !eventArray.includes(event.name) && 
                     <div>
                     <a  style={{border:"3px solid #FFEB00"}} disabled>
                       {event.butto2}
